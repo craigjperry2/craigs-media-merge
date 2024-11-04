@@ -42,6 +42,20 @@
   justify-content: center;
 }
 
+.config-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.config-editor div {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: center;
+  margin: 5px;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -110,3 +124,4 @@ button {
     background-color: #0f0f0f69;
   }
 }
+

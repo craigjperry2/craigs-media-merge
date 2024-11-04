@@ -14,6 +14,31 @@ pub fn App() -> impl IntoView {
                 <button>"Configuration"</button>
             </form>
 
+            <ConfigurationEditor config={vec![
+                String::from("*.tmp"),
+                String::from("*.bak"),
+                String::from("*.swp"),
+            ]} />
         </main>
+    }
+}
+
+#[component]
+pub fn ConfigurationEditor(config: Vec<String>) -> impl IntoView {
+    view! {
+        <div>
+            <h2>"Configuration Editor"</h2>
+            <form class="config-editor">
+                {config.iter().map(|pattern| view! {
+                    <div>
+                        <input type="text" value={pattern} />
+                        <button>"Remove"</button>
+                    </div>
+                }).collect::<Vec<_>>()}
+                <div>
+                    <button>"Add"</button>
+                </div>
+            </form>
+        </div>
     }
 }
