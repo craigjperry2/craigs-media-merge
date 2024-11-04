@@ -2,6 +2,8 @@ use leptos::*;
 
 #[component]
 pub fn App() -> impl IntoView {
+    let (show_config_editor, set_show_config_editor) = create_signal(false);
+
     view! {
         <main class="container">
             <h1>"Craig's Media Merge"</h1>
@@ -10,15 +12,20 @@ pub fn App() -> impl IntoView {
                 <img src="public/cmm-logo.svg" class="logo cmm" alt="logo" />
             </div>
 
-            <form class="row">
-                <button>"Configuration"</button>
-            </form>
-
-            <ConfigurationEditor config={vec![
-                String::from("*.tmp"),
-                String::from("*.bak"),
-                String::from("*.swp"),
-            ]} />
+            {move || if show_config_editor.get() {
+                view! {
+                    <ConfigurationEditor config={vec![
+                        String::from("*.tmp"),
+                        String::from("*.bak"),
+                        String::from("*.swp"),
+                ]} /> }} else {
+                    view! {
+                        <form class="row">
+                            <button on:click=move |_| set_show_config_editor.update(|v| *v = !*v)>"Configuration"</button>
+                        </form>
+                    }.into_view()
+                }
+            }
         </main>
     }
 }
