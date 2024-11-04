@@ -1,4 +1,5 @@
 use leptos::*;
+use crate::config::Config;
 
 #[component]
 pub fn App() -> impl IntoView {
@@ -13,12 +14,10 @@ pub fn App() -> impl IntoView {
             </div>
 
             {move || if show_config_editor.get() {
+                let config = Config::new();
                 view! {
-                    <ConfigurationEditor config={vec![
-                        String::from("*.tmp"),
-                        String::from("*.bak"),
-                        String::from("*.swp"),
-                ]} /> }} else {
+                    <ConfigurationEditor config={config.file_exclude_patterns().clone()} />
+                }} else {
                     view! {
                         <form class="row">
                             <button on:click=move |_| set_show_config_editor.update(|v| *v = !*v)>"Configuration"</button>
